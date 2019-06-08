@@ -22,6 +22,7 @@ steps:
     python -m pip install --upgrade pip
     pip install -r requirements.pipelines.txt
     pip install pytest pytest-azurepipelines
+    pip install pysqlite3 
   displayName: 'Install dependencies'
 - script: |
     python -m pytest .
