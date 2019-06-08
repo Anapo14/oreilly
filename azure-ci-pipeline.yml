@@ -8,7 +8,7 @@ pool:
 strategy:
   matrix:
     Python37:
-      PYTHON_VERSION: '3.7'
+      PYTHON_VERSION: '3.8'
     Python36:
       PYTHON_VERSION: '3.6'
   maxParallel: 3
@@ -22,7 +22,7 @@ steps:
     python -m pip install --upgrade pip
     pip install -r requirements.pipelines.txt
     pip install pytest pytest-azurepipelines
-    pip install pysqlite3 
+    pip install pysqlite3
   displayName: 'Install dependencies'
 - script: |
     python -m pytest .
