@@ -7,8 +7,6 @@ pool:
   vmImage: 'Ubuntu 16.04'
 strategy:
   matrix:
-    Python37:
-      PYTHON_VERSION: '3.8'
     Python36:
       PYTHON_VERSION: '3.6'
   maxParallel: 3
