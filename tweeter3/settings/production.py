@@ -3,6 +3,10 @@ from tweeter3.settings.base import *
 import os
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'my-secret-key')
+DB_USER = os.environ.get('DB_USER', 'db_user')
+DB_NAME = os.environ.get('DB_NAME', 'db_name')
+DB_HOST = os.environ.get('DB_HOST', 'db_host')
+DB_PASSWORD = os.environ.get('DB_PASSWORD', 'db_password')
 
 DEBUG = False
 
