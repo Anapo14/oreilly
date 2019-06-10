@@ -3,10 +3,6 @@ from tweeter3.settings.base import *
 import os
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'my-secret-key')
-DB_USER = os.environ.get('DB_USER', 'db_user')
-DB_NAME = os.environ.get('DB_NAME', 'db_name')
-DB_HOST = os.environ.get('DB_HOST', 'db_host')
-DB_PASSWORD = os.environ.get('DB_PASSWORD', 'db_password')
 
 DEBUG = False
 
@@ -17,10 +13,11 @@ ALLOWED_HOSTS = ['*']
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DB_USER = os.environ['DB_USER']
-DB_NAME = os.environ['DB_NAME']
-DB_HOST = os.environ['DB_HOST']
-DB_PASSWORD = os.environ['DB_PASSWORD']
+DB_USER = os.environ.get('DB_USER', 'db_user')
+DB_NAME = os.environ.get('DB_NAME', 'db_name')
+DB_HOST = os.environ.get('DB_HOST', 'db_host')
+DB_PASSWORD = os.environ.get('DB_PASSWORD', 'db_password')
+
 
 DATABASES = {
     'default': {
