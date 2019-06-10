@@ -13,9 +13,9 @@ ALLOWED_HOSTS = []
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DB_USER = "postgres"
-DB_NAME = "postgres"
-DB_HOST = "db"
+DB_USER = "oreillyconference"
+DB_NAME = "tweeterdboreilly"
+DB_HOST = "tweeterdboreilly"
 DB_PASSWORD = "IAmAPassword1!"
 
 DATABASES = {
