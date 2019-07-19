@@ -36,4 +36,5 @@ steps:
     ConnectedServiceName: $(ConnectedServiceName)
     WebAppName: $(WebAppName)
     DockerNamespace: $(imageName)
+    DockerRepository: 'tweeter-app:latest'
     DockerImageTag: $(Build.BuildId)
