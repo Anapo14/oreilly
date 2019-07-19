@@ -33,7 +33,7 @@ steps:
   displayName: Azure App Service Deploy
   inputs:
     appType: webAppContainer
-    ConnectedServiceName: $(azureSubscriptionEndpoint)
+    ConnectedServiceName: $(ConnectedServiceName)
     WebAppName: $(WebAppName)
     DockerNamespace: $(imageName)
     DockerImageTag: $(Build.BuildId)
