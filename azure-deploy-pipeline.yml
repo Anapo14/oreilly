@@ -9,6 +9,8 @@ pool:
 variables:
   imageName: 'oreillyconference.azurecr.io/tweeter-app:latest'
   containerName: 'tweeterapp'
+  ConnectedServiceName: 'Pipelines_AppBuilding'
+  WebAppName: tweeteroreilly
 steps:
 - script: docker login oreillyconference.azurecr.io -u oreillyconference -p $DOCKER_LOGIN_PASSWORD
   env:
@@ -27,3 +29,11 @@ steps:
   displayName: run django migrations
 - script: docker push $(imageName)
   displayName: 'docker push'
+- task: AzureRMWebAppDeployment@4
+  displayName: Azure App Service Deploy
+  inputs:
+    appType: webAppLinux
+    RuntimeStack: 'PYTHON|3.6'
+    ConnectedServiceName: $(ConnectedServiceName)
+    WebAppName: $(WebAppName)
+    Package: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
