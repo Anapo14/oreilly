@@ -32,8 +32,8 @@ steps:
 - task: AzureRMWebAppDeployment@4
   displayName: Azure App Service Deploy
   inputs:
-    appType: webAppLinux
-    RuntimeStack: 'PYTHON|3.6'
-    ConnectedServiceName: $(ConnectedServiceName)
+    appType: webAppContainer
+    ConnectedServiceName: $(azureSubscriptionEndpoint)
     WebAppName: $(WebAppName)
-    Package: '$(Build.ArtifactStagingDirectory)/Application$(Build.BuildId).zip'
+    DockerNamespace: $(imageName)
+    DockerImageTag: $(Build.BuildId)
