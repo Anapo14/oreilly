@@ -1,9 +1,9 @@
 {
-    "python.testing.pyTestArgs": [
+    "python.testing.pytestArgs": [
         "tweeter"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
-    "python.testing.pyTestEnabled": true,
-    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python.exe"
+    "python.testing.pytestEnabled": true,
+    "python.pythonPath": "env\\Scripts\\python.exe"
 }

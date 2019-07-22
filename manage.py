@@ -7,7 +7,7 @@ if __name__ == '__main__':
     # Use .env file if it is found
     env_path = os.getcwd() + '/.env'
     if os.path.exists(env_path):
-        dotenv.read_dotenv(env_path)
+        dotenv.load_dotenv(env_path)
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tweeter3.settings.development')
     if (os.environ.get('DJANGO_SETTINGS_MODULE') == 'tweeter3.settings.devcontainer'):
