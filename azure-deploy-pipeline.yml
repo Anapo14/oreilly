@@ -36,6 +36,6 @@ steps:
     ConnectedServiceName: $(ConnectedServiceName)
     WebAppName: $(WebAppName)
     DockerNamespace: 'oreillyconference.azurecr.io'
-    DockerRepository: 'tweeter-app'
+    DockerRepository: 'tweeter-app/latest'
     #DockerImageTag is optional
-    DockerImageTag: $(Build.BuildId)
+   # DockerImageTag: $(Build.BuildId)
