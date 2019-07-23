@@ -38,6 +38,6 @@ steps:
     ConnectedServiceName: $(ConnectedServiceName)
     WebAppName: $(WebAppName)
     DockerNamespace: $(containerendpoint)
-    DockerRepository: $(containerName)
+    DockerRepository: $(containerrepo)
     #DockerImageTag is optional
     #DockerImageTag: $(Build.BuildId)
