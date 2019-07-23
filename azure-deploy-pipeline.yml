@@ -7,7 +7,9 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'oreillyconference.azurecr.io/tweeter-app:latest'
+  # imageName: 'oreillyconference.azurecr.io/tweeter-app:latest'
+  containerendpoint: 'oreillyconference.azurecr.io'
+  containerrepo: tweeter-app:latest
   containerName: 'tweeterapp'
   ConnectedServiceName: 'Pipelines_AppBuilding'
   WebAppName: tweeteroreilly
@@ -16,9 +18,9 @@ steps:
   env:
     DOCKER_LOGIN_PASSWORD: $(ACR_KEY)
   displayName: 'docker login'
-- script: docker build -f Dockerfile -t $(imageName) .
+- script: docker build -f Dockerfile -t $(containerendpoint)/$(containerrepo) .
   displayName: 'docker build'
-- script: docker run --name $(containerName) --detach -e DJANGO_SETTINGS_MODULE=tweeter3.settings.production -e DB_USER=$DB_USER -e DB_PASSWORD=$DB_PASSWORD -e DB_NAME=$DB_NAME -e DB_HOST=$DB_HOST $(imageName)
+- script: docker run --name $(containerName) --detach -e DJANGO_SETTINGS_MODULE=tweeter3.settings.production -e DB_USER=$DB_USER -e DB_PASSWORD=$DB_PASSWORD -e DB_NAME=$DB_NAME -e DB_HOST=$DB_HOST $(containerendpoint)/$(containerrepo)
   env:
     DB_USER: $(DB_USER)
     DB_PASSWORD: $(DB_PASSWORD)
@@ -27,7 +29,7 @@ steps:
   displayName: 'start container'
 - script: docker exec $(containerName) python3 manage.py migrate
   displayName: run django migrations
-- script: docker push $(imageName)
+- script: docker push $(containerendpoint)/$(containerrepo) 
   displayName: 'docker push'
 - task: AzureRMWebAppDeployment@4
   displayName: Azure App Service Deploy
@@ -35,7 +37,7 @@ steps:
     appType: webAppContainer
     ConnectedServiceName: $(ConnectedServiceName)
     WebAppName: $(WebAppName)
-    DockerNamespace: 'oreillyconference.azurecr.io'
-    DockerRepository: 'tweeter-app:latest'
+    DockerNamespace: $(containerendpoint)
+    DockerRepository: $(containerName)
     #DockerImageTag is optional
-   # DockerImageTag: $(Build.BuildId)
+    #DockerImageTag: $(Build.BuildId)

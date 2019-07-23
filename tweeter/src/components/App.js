@@ -19,7 +19,7 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <h1 className="header">Tweeter-TEST!</h1>
+                <h1 className="header">Tweeter-RefactoringTest!!</h1>
                 <div id="inner-body">
                     <div id="menubar">
                         <div className="icon-bar">
