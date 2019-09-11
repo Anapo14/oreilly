@@ -31,7 +31,7 @@ steps:
     DB_HOST: $(DB_HOST)
   displayName: 'start container'
   #Get the currently running hosted agent's IP address.
-- bash: |
+- bash: 
     export MYIP=$(curl -s https://api.ipify.org)
     echo "##vso[task.setvariable variable=MY_IP]$MYIP"
     echo "This is the IP:$(MY_IP)" 
