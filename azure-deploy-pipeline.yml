@@ -34,7 +34,7 @@ steps:
 - bash: |
     export MYIP=$(curl -s https://api.ipify.org)
     echo "##vso[task.setvariable variable=MY_IP]$MYIP"
-    echo "This is the IP:$MY_IP" 
+    echo "This is the IP:$(MY_IP)" 
   displayName: Determine Hosted Agent's IP Address
   #Create Firewall rule for Postgres Database
 - task: AzureCLI@1
@@ -44,7 +44,7 @@ steps:
     azureSubscription: $(AZURE_SERVICE_CONNECTION)
     azureConnectionType: 'Azure Resource Manager'
     scriptLocation: 'inlineScript'
-    inlineScript: az postgres server firewall-rule create -g dbResourceGroup -s $DB_HOST -n allowip --start-ip-address MY_IP --end-ip-address MY_IP
+    inlineScript: az postgres server firewall-rule create -g dbResourceGroup -s $DB_HOST -n allowip --start-ip-address $(MY_IP) --end-ip-address $(MY_IP)
 - script: docker exec $(containerName) python3 manage.py migrate
   displayName: run django migrations
 - script: docker push $(containerendpoint)/$(containerrepo) 
