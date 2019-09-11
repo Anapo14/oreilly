@@ -39,7 +39,7 @@ steps:
 - task: AzureCLI@1
   displayName: Create Firewall Rule for Postgres Database
   inputs:
-    azureSubscription: 'X'
+    azureSubscription: $(AZURE_SUBSCRIPTION)
     scriptLocation: 'inlineScript'
     inlineScript: az postgres server firewall-rule create -g dbResourceGroup -s $DB_HOST -n allowip --start-ip-address MY_IP --end-ip-address MY_IP
 - script: docker exec $(containerName) python3 manage.py migrate
