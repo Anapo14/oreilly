@@ -32,14 +32,15 @@ steps:
   displayName: 'start container'
   #Get the currently running hosted agent's IP address.
 - bash: |
-    export MYIP=$(curl https://www.ipify.org/)
+    export MYIP=$(curl https://api.ipify.org/)
     echo "##vso[task.setvariable variable=MY_IP]$MYIP"
   displayName: Determine Hosted Agent's IP Address
   #Create Firewall rule for Postgres Database
 - task: AzureCLI@1
   displayName: Create Firewall Rule for Postgres Database
   inputs:
-    azureSubscription: 'Pipelines_AppBuilding'
+  #Set an environment variable that contains the name of the service connection you created.
+    azureSubscription: $(AZURE_SERVICE_CONNECTION)
    # azureConnectionType: 'Azure Resource Manager'
     scriptLocation: 'inlineScript'
     inlineScript: az postgres server firewall-rule create -g dbResourceGroup -s $DB_HOST -n allowip --start-ip-address MY_IP --end-ip-address MY_IP
