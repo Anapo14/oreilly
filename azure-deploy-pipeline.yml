@@ -13,6 +13,9 @@ variables:
   containerName: 'tweeterapp'
   ConnectedServiceName: 'Pipelines_AppBuilding'
   WebAppName: tweeteroreilly
+  #resourcegroup that contains Postgres Database
+  dbResourceGroup: appsvc_rg_linux_centralus
+  #server name of database
 steps:
 - script: docker login oreillyconference.azurecr.io -u oreillyconference -p $DOCKER_LOGIN_PASSWORD
   env:
@@ -27,6 +30,18 @@ steps:
     DB_NAME: $(DB_NAME)
     DB_HOST: $(DB_HOST)
   displayName: 'start container'
+  #Get the currently running hosted agent's IP address.
+- bash: |
+    export MYIP=$(curl https://www.ipify.org/)
+    echo "##vso[task.setvariable variable=MY_IP]$MYIP"
+  displayName: Determine Hosted Agent's IP Address
+  #Create Firewall rule for Postgres Database
+- task: AzureCLI@1
+  displayName: Create Firewall Rule for Postgres Database
+  inputs:
+    azureSubscription: 'X'
+    scriptLocation: 'inlineScript'
+    inlineScript: az postgres server firewall-rule create -g dbResourceGroup -s $DB_HOST -n allowip --start-ip-address MY_IP --end-ip-address MY_IP
 - script: docker exec $(containerName) python3 manage.py migrate
   displayName: run django migrations
 - script: docker push $(containerendpoint)/$(containerrepo) 
