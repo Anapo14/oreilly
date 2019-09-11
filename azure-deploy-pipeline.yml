@@ -43,7 +43,7 @@ steps:
   inputs:
   #Set an environment variable that contains the name of the service connection you created.
     azureSubscription: $(AZURE_SERVICE_CONNECTION)
-    azureConnectionType: 'Azure Resource Manager'
+    ## azureConnectionType: 'Azure Resource Manager'
     scriptLocation: 'inlineScript'
     inlineScript: az postgres server firewall-rule create -g dbResourceGroup -s $DB_HOST -n allowip --start-ip-address $(MY_IP) --end-ip-address $(MY_IP)
 - script: docker exec $(containerName) python3 manage.py migrate
