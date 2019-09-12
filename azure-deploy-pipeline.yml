@@ -43,8 +43,8 @@ steps:
   inputs:
   #Set an environment variable that contains the name of the service connection you created in the settings panel of Pipelines.
     azureSubscription: $(AZURE_SERVICE_CONNECTION)
-    connectedServiceNameARM: 7ca7c21b-d428-4786-a054-3fea9b36f424
-    ## azureConnectionType: 'Azure Resource Manager'
+    connectedServiceNameARM: $(AZURE_SERVICE_CONNECTION)
+    azureConnectionType: 'Azure Resource Manager'
     scriptLocation: 'inlineScript'
     inlineScript: az postgres server firewall-rule create -g dbResourceGroup -s $DB_HOST -n allowip --start-ip-address $(MY_IP) --end-ip-address $(MY_IP)
 - script: docker exec $(containerName) python3 manage.py migrate
