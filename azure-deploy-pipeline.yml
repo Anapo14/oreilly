@@ -33,9 +33,12 @@ steps:
   #Get the currently running hosted agent's IP address.
 - bash: |
     export MYIP=$(curl -s https://api.ipify.org)
+    export testIP=$(ifconfig)
     echo "##vso[task.setvariable variable=MY_IP]$MYIP"
+    echo "##vso[task.setvariable variable=test_IP]$testIP"
 - script: |
         echo "This is the IP:$(MY_IP)" 
+        echo "$(test_IP)"
   displayName: Determine Hosted Agent's IP Address
   #Create Firewall rule for Postgres Database
 - task: AzureCLI@1
