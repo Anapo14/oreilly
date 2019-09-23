@@ -42,11 +42,11 @@ steps:
   displayName: Create Firewall Rule for Postgres Database
   inputs:
   #Set an environment variable that contains the name of the service connection you created in the settings panel of Pipelines.
-    azureSubscription: 'Pipelines_AppBuilding'
+    azureSubscription: $(ConnectedServiceName)
     # connectedServiceNameARM: $(AZURE_SERVICE_CONNECTION)
     # azureConnectionType: 'Azure Resource Manager'
     scriptLocation: 'inlineScript'
-    inlineScript: az postgres server firewall-rule create -g dbResourceGroup -s $DB_HOST -n allowip --start-ip-address $(MY_IP) --end-ip-address $(MY_IP)
+    inlineScript: az postgres server firewall-rule create -g $(dbResourceGroup) -s $(DB_HOST) -n allowip --start-ip-address $(MY_IP) --end-ip-address $(MY_IP)
 - script: docker exec $(containerName) python3 manage.py migrate
   displayName: run django migrations
 - script: docker push $(containerendpoint)/$(containerrepo) 
