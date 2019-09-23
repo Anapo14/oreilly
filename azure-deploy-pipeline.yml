@@ -42,7 +42,7 @@ steps:
   displayName: Create Firewall Rule for Postgres Database
   inputs:
   #Set an environment variable that contains the name of the service connection you created in the settings panel of Pipelines.
-    azureSubscription: $(AZURE_SERVICE_CONNECTION)
+    azureSubscription: 'Pipelines_AppBuilding'
     # connectedServiceNameARM: $(AZURE_SERVICE_CONNECTION)
     # azureConnectionType: 'Azure Resource Manager'
     scriptLocation: 'inlineScript'
